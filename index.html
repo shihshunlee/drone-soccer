@@ -26,7 +26,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 a{color:var(--pitch)}
 html[data-lang="zh"] .en{display:none!important}
 html[data-lang="en"] .zh{display:none!important}
@@ -228,6 +228,44 @@ footer li{margin:6px 0}
 footer a{color:#c8d3de;word-break:break-word}
 .foot-bottom{margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .to-top{color:var(--lime);text-decoration:none;font-weight:700}
+
+/* ---------- tech & motion layer ---------- */
+:root{--glow:0 0 0 1px rgba(200,243,29,.55),0 18px 40px -12px rgba(13,122,62,.45),0 0 28px -6px rgba(200,243,29,.55)}
+.lift{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s;will-change:transform}
+@media (hover:hover){
+  .lift:hover,.js .lift.reveal.in:hover{transform:translateY(-8px);box-shadow:var(--glow);border-color:rgba(200,243,29,.9)!important}
+  .fcard.lift:hover{background:rgba(200,243,29,.06)}
+  .rung.lift:hover,.js .rung.lift.reveal.in:hover{transform:translateY(-8px) scale(1.02)}
+  .fig.lift:hover img{transform:scale(1.03)}
+  .stat:hover b{text-shadow:0 0 18px rgba(200,243,29,.8);transform:translateY(-4px)}
+  .hot:hover .hl{filter:drop-shadow(0 0 6px #c8f31d)}
+  .nav-links a:hover{box-shadow:inset 0 -2px 0 var(--lime)}
+  table tbody tr:hover td,table tbody tr:hover th{background:rgba(200,243,29,.12)}
+}
+.fig img{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.stat b{transition:transform .3s,text-shadow .3s}
+.flow .step{z-index:0}.flow .step:hover{z-index:1}
+/* neon title + scanline grid */
+.hero h1 span{text-shadow:0 0 30px rgba(200,243,29,.25)}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(rgba(200,243,29,.06) 1px,transparent 1px) 0 0/100% 4px;mix-blend-mode:screen;opacity:.5}
+section.dark{position:relative;overflow:hidden}
+section.dark::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(200,243,29,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(200,243,29,.07) 1px,transparent 1px);background-size:48px 48px;-webkit-mask-image:radial-gradient(ellipse at 70% 0%,#000 10%,transparent 70%);mask-image:radial-gradient(ellipse at 70% 0%,#000 10%,transparent 70%)}
+section.dark .wrap{position:relative}
+.sec-head h2::after{content:"";display:block;height:4px;width:72px;margin-top:12px;border-radius:2px;background:linear-gradient(90deg,var(--lime),var(--pitch),var(--lime));background-size:200% 100%;animation:sweep 3s linear infinite}
+@keyframes sweep{to{background-position:-200% 0}}
+.tl::before{box-shadow:0 0 0 0 rgba(200,243,29,.6);animation:ping 2.4s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(200,243,29,.55)}80%,100%{box-shadow:0 0 0 12px rgba(200,243,29,0)}}
+.pin-bg{animation:pinpulse 2.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes pinpulse{50%{transform:scale(1.15)}}
+.kicker{box-shadow:0 0 24px rgba(200,243,29,.45)}
+.info{box-shadow:inset 0 0 0 1px rgba(200,243,29,.25),0 20px 40px -20px rgba(0,0,0,.5)}
+/* scroll reveal */
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .reveal{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
@@ -502,7 +540,7 @@ footer a{color:#c8d3de;word-break:break-word}
         </table>
       </div>
       <figure class="fig">
-        <img src="assets/fai-equipment.jpg" alt="FAI 國際賽制專業無人機足球設備：20cm 青少年球與 6×3×3m 場地、40cm 成人球與 14×7×5m 場地" loading="lazy" width="1400" height="1996">
+        <img src="assets/fai-equipment.jpg" alt="FAI 國際賽制專業無人機足球設備：20cm 青少年球與 6×3×3m 場地、40cm 成人球與 14×7×5m 場地" loading="lazy" width="982" height="1400">
         <figcaption><span class="zh">兩種級別的球、遙控器與場地示意</span><span class="en">Balls, transmitters and fields for both classes</span></figcaption>
       </figure>
     </div>
@@ -808,6 +846,16 @@ footer a{color:#c8d3de;word-break:break-word}
     g.addEventListener('click', pick);
     g.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); pick(); } });
   });
+
+
+  // hover-lift & scroll reveal
+  document.querySelectorAll('.card,.role,.fcard,.rung,.flow .step,details.rule,.pt,.fig,.table-scroll').forEach(function(el){ el.classList.add('lift'); });
+  var rv = document.querySelectorAll('.sec-head,.card,.role,.fcard,.rung,.flow .step,details.rule,.tl,.fig,.table-scroll,.field-svg,.info,.facts');
+  if ('IntersectionObserver' in window){
+    root.classList.add('js');
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ var t=e.target; t.classList.add('in'); io.unobserve(t); setTimeout(function(){ t.style.transitionDelay=''; }, 1000); } }); }, {rootMargin:'0px 0px -8% 0px'});
+    rv.forEach(function(el,i){ el.classList.add('reveal'); el.style.transitionDelay = (i%4)*70+'ms'; io.observe(el); });
+  }
 
   var initial = 'zh';
   var q = new URLSearchParams(location.search).get('lang');
