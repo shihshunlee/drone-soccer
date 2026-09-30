@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="zh-Hant" data-lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>無人機足球資訊站 · Drone Soccer Hub</title>
+<meta name="description" content="無人機足球（Drone Soccer）規則、場地、規格、賽制與賽事資訊。依據 FAI 2026 運動規章 F9A 整理。">
+<meta property="og:title" content="無人機足球資訊站 · Drone Soccer Hub">
+<meta property="og:description" content="在空中踢的足球——規則、場地、規格、賽制一次看懂。">
+<meta property="og:image" content="assets/tianqiong-2025-final.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='28' fill='%230d7a3e'/%3E%3Ccircle cx='32' cy='32' r='20' fill='none' stroke='%23fff' stroke-width='4'/%3E%3Cpath d='M12 32h40M32 12v40' stroke='%23fff' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+TC:wght@400;500;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pitch:#0d7a3e; --pitch-dark:#085a2d; --lime:#c8f31d;
+  --red:#e3263a; --blue:#1f6fe5;
+  --ink:#0c1420; --ink-2:#3a4656; --muted:#6b7686;
+  --paper:#ffffff; --paper-2:#f3f5f2; --line:#dfe4dc;
+  --night:#0c1420;
+  --radius:14px;
+  --display:"Anton","Noto Sans TC",Impact,sans-serif;
+  --sans:"Inter","Noto Sans TC",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:var(--pitch)}
+html[data-lang="zh"] .en{display:none!important}
+html[data-lang="en"] .zh{display:none!important}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+@media (max-width:600px){.wrap{padding:0 16px}}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(12,20,32,.94);backdrop-filter:blur(8px);color:#fff}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:900;letter-spacing:.02em;white-space:nowrap}
+.brand svg{width:28px;height:28px}
+.nav-links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{color:#cfd6df;text-decoration:none;font-size:14px;font-weight:600;padding:8px 12px;border-radius:8px;white-space:nowrap}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.lang{display:flex;border:1px solid rgba(255,255,255,.25);border-radius:999px;overflow:hidden;flex-shrink:0}
+.lang button{background:none;border:0;color:#cfd6df;font:600 13px var(--sans);padding:6px 12px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--lime);color:var(--ink)}
+@media (max-width:860px){
+  .nav .wrap{flex-wrap:wrap;height:auto;padding-top:10px;padding-bottom:0;gap:10px}
+  .lang{margin-left:auto}
+  .nav-links{order:3;width:100%;margin:0 -8px;padding-bottom:6px}
+}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:var(--night)}
+.hero-img{position:absolute;inset:0;background:url(assets/tianqiong-2025-final.jpg) center 40%/cover no-repeat;filter:saturate(1.05)}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(12,20,32,.25) 0%,rgba(12,20,32,.55) 45%,rgba(12,20,32,.92) 100%)}
+.hero-slash{position:absolute;z-index:1;left:-5%;bottom:0;width:70%;height:62%;background:var(--pitch);clip-path:polygon(0 18%,100% 0,82% 100%,0 100%);opacity:.92}
+.hero-slash::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 60px,rgba(255,255,255,.05) 60px 120px)}
+.hero .wrap{position:relative;z-index:2;padding-bottom:56px;width:100%}
+.kicker{display:inline-flex;align-items:center;gap:8px;background:var(--lime);color:var(--ink);font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:4px;transform:skewX(-8deg)}
+.kicker>*{transform:skewX(8deg)}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(56px,11vw,140px);line-height:.92;margin:18px 0 6px;letter-spacing:.01em;text-transform:uppercase}
+.hero h1 .zh{font-family:"Noto Sans TC",sans-serif;font-weight:900;font-size:.72em;letter-spacing:.02em;display:block}
+.hero h1 small{display:block;font-size:.34em;color:#fff;opacity:.85;letter-spacing:.08em;margin-top:6px}
+.hero p.lead{font-size:clamp(17px,2.2vw,21px);max-width:620px;margin:10px 0 28px;color:#e9eef3}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;max-width:760px;border-top:2px solid rgba(255,255,255,.3)}
+.stat{padding:14px 18px 0 0}
+.stat b{font-family:var(--display);font-weight:400;font-size:clamp(40px,6vw,64px);line-height:1;display:block;color:#fff}
+.stat b i{font-style:normal;color:var(--lime)}
+.stat span{font-size:14px;color:#cfd6df;font-weight:600}
+@media (max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.hero-slash{width:120%;height:55%}}
+.photo-credit{position:absolute;right:16px;top:76px;z-index:2;font-size:12px;color:#fff;background:rgba(0,0,0,.45);padding:4px 10px;border-radius:999px}
+
+/* ---------- sections ---------- */
+section{padding:88px 0}
+section.alt{background:var(--paper-2)}
+section.dark{background:var(--night);color:#e9eef3}
+.sec-head{display:flex;align-items:flex-end;gap:16px;margin-bottom:36px;flex-wrap:wrap}
+.sec-num{font-family:var(--display);font-size:64px;line-height:.8;color:var(--pitch);opacity:.18}
+section.dark .sec-num{color:var(--lime);opacity:.35}
+.sec-head h2{margin:0;font-size:clamp(28px,4vw,42px);font-weight:900;line-height:1.15}
+.sec-head h2 em{font-style:normal;display:block;font-family:var(--display);font-weight:400;font-size:.5em;letter-spacing:.12em;color:var(--pitch);text-transform:uppercase}
+section.dark .sec-head h2 em{color:var(--lime)}
+.sec-head p{flex-basis:100%;margin:6px 0 0;color:var(--ink-2);max-width:720px;font-size:17px}
+section.dark .sec-head p{color:#b9c2cd}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:900px){.g3,.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+section.alt .card{border-color:transparent;box-shadow:0 1px 0 rgba(0,0,0,.04)}
+.card h3{margin:0 0 8px;font-size:19px;font-weight:800}
+.card p{margin:0;color:var(--ink-2)}
+.tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.06em;padding:3px 8px;border-radius:4px;background:var(--pitch);color:#fff;margin-bottom:10px}
+.tag.red{background:var(--red)}.tag.blue{background:var(--blue)}.tag.lime{background:var(--lime);color:var(--ink)}.tag.ink{background:var(--ink)}
+.cite{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.02em}
+.note{border-left:4px solid var(--lime);background:#f7fbe6;padding:14px 18px;border-radius:0 10px 10px 0;color:var(--ink-2);font-size:15px}
+section.dark .note{background:rgba(200,243,29,.08);color:#dfe6ec}
+
+/* ---------- intro ---------- */
+.intro{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.intro p.big{font-size:clamp(19px,2.3vw,24px);line-height:1.6;font-weight:500;margin:0 0 20px}
+.intro p.big b{background:linear-gradient(transparent 62%,rgba(200,243,29,.7) 62%)}
+.roles{display:grid;gap:14px}
+.role{display:flex;gap:16px;align-items:flex-start;padding:18px;border-radius:var(--radius);background:var(--paper-2)}
+.role .ball{flex:0 0 52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:900;font-size:13px;position:relative}
+.role .ball::before{content:"";position:absolute;inset:4px;border-radius:50%;border:2px dashed rgba(255,255,255,.7)}
+.role h4{margin:0 0 2px;font-size:17px}
+.role p{margin:0;color:var(--ink-2);font-size:15px}
+@media (max-width:860px){.intro{grid-template-columns:1fr}}
+
+/* ---------- timeline ---------- */
+.timeline{position:relative;display:grid;gap:0;margin-left:10px}
+.timeline::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:3px;background:linear-gradient(var(--lime),var(--pitch))}
+.tl{position:relative;padding:0 0 30px 34px}
+.tl::before{content:"";position:absolute;left:-7px;top:6px;width:17px;height:17px;border-radius:50%;background:var(--night);border:3px solid var(--lime)}
+.tl.future::before{background:var(--lime)}
+.tl time{font-family:var(--display);font-size:22px;color:var(--lime);letter-spacing:.04em}
+.tl h4{margin:2px 0 4px;font-size:19px;color:#fff}
+.tl p{margin:0;color:#b9c2cd;font-size:15px;max-width:720px}
+.tl .src{font-size:12px;color:#7d8896}
+.tl .src a{color:#9fb0c2}
+
+/* ---------- field ---------- */
+.field-wrap{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:900px){.field-wrap{grid-template-columns:1fr}}
+.seg{display:inline-flex;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:16px}
+.seg button{border:0;background:none;font:700 14px var(--sans);padding:8px 16px;border-radius:999px;cursor:pointer;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.seg button{white-space:nowrap}
+@media (max-width:600px){.seg .sub{display:none}.info{position:static}}
+.field-svg{width:100%;height:auto;background:var(--paper);border-radius:var(--radius);border:1px solid var(--line)}
+.hot{cursor:pointer;outline:none}
+.hot:hover .hl,.hot:focus-visible .hl,.hot.on .hl{stroke:var(--lime);stroke-width:5}
+.hot .hl{transition:stroke .15s}
+.pin{font:800 15px var(--sans);fill:var(--ink)}
+.pin-bg{fill:var(--lime);stroke:var(--ink);stroke-width:2}
+.dim{font:700 16px var(--sans);fill:var(--ink-2)}
+.info{position:sticky;top:84px;background:var(--night);color:#fff;border-radius:var(--radius);padding:26px;min-height:260px}
+.info .tag{background:var(--lime);color:var(--ink)}
+.info h3{margin:0 0 10px;font-size:22px}
+.info p{margin:0 0 10px;color:#cfd6df}
+.info ul{margin:0;padding-left:18px;color:#cfd6df}
+.info .cite{color:#8d99a8}
+.field-hint{font-size:14px;color:var(--muted);margin-top:10px}
+
+/* ---------- flow ---------- */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:40px;counter-reset:f}
+.flow .step{position:relative;padding:22px 22px 22px 22px;background:var(--paper);border:1px solid var(--line);margin-right:-1px}
+.flow .step:first-child{border-radius:var(--radius) 0 0 var(--radius)}
+.flow .step:last-child{border-radius:0 var(--radius) var(--radius) 0}
+.flow .step::before{counter-increment:f;content:counter(f,decimal-leading-zero);font-family:var(--display);font-size:40px;color:var(--pitch);line-height:1;display:block;margin-bottom:8px}
+.flow h4{margin:0 0 4px;font-size:17px}
+.flow p{margin:0;font-size:14px;color:var(--ink-2)}
+@media (max-width:900px){.flow{grid-template-columns:1fr 1fr}.flow .step{border-radius:0!important;margin:0 -1px -1px 0}}
+@media (max-width:560px){.flow{grid-template-columns:1fr}}
+
+/* ---------- spec table ---------- */
+.spec{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr);gap:28px;align-items:start}
+@media (max-width:1000px){.spec{grid-template-columns:1fr}.spec .fig{max-width:560px}}
+.table-scroll{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--line);background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:480px;font-size:15px}
+th,td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:var(--ink);color:#fff;font-weight:800;font-size:14px}
+thead th.a{background:var(--pitch)}
+thead th.b{background:var(--pitch-dark)}
+tbody th{font-weight:700;color:var(--ink-2);white-space:nowrap;width:30%}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+td b{font-size:17px}
+.fig{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff}
+.fig figcaption{font-size:13px;color:var(--muted);padding:10px 14px;border-top:1px solid var(--line)}
+figure{margin:0}
+
+/* ---------- rules accordion ---------- */
+.rules{display:grid;gap:12px}
+details.rule{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+details.rule[open]{border-color:var(--pitch)}
+details.rule summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:18px 20px;font-weight:800;font-size:17px}
+details.rule summary::-webkit-details-marker{display:none}
+details.rule summary .code{font:700 12px var(--sans);color:var(--muted);background:var(--paper-2);border-radius:6px;padding:3px 8px;white-space:nowrap}
+details.rule summary::after{content:"+";margin-left:auto;font-size:24px;font-weight:400;color:var(--pitch);transition:transform .2s}
+details.rule[open] summary::after{transform:rotate(45deg)}
+details.rule .body{padding:0 20px 20px 20px;color:var(--ink-2)}
+details.rule .body ul{margin:0;padding-left:20px}
+details.rule .body li{margin:4px 0}
+.ladder{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:28px}
+@media (max-width:900px){.ladder{grid-template-columns:1fr 1fr}}
+.rung{border-radius:var(--radius);padding:18px;color:#fff}
+.rung h4{margin:0 0 4px;font-size:18px;display:flex;align-items:center;gap:8px}
+.rung p{margin:0;font-size:14px;opacity:.92}
+.rung .card-ico{width:18px;height:24px;border-radius:3px;display:inline-block;border:2px solid rgba(255,255,255,.7)}
+.r1{background:var(--pitch)} .r2{background:#5b6675} .r3{background:#d9a400;color:var(--ink)} .r4{background:var(--red)}
+.r3 .card-ico{background:#ffd43b;border-color:var(--ink)} .r4 .card-ico{background:#fff0}
+
+/* ---------- format ---------- */
+.points{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 14px}
+.pt{flex:1 1 90px;text-align:center;padding:16px 8px;border-radius:12px;background:var(--paper-2)}
+.pt b{font-family:var(--display);font-weight:400;font-size:44px;line-height:1;display:block;color:var(--pitch)}
+.pt span{font-size:14px;font-weight:700;color:var(--ink-2)}
+ol.clean{margin:0;padding-left:20px;color:var(--ink-2)}
+ol.clean li{margin:4px 0}
+
+/* ---------- event ---------- */
+.event{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:900px){.event{grid-template-columns:1fr}}
+.event .fig img{aspect-ratio:3/2;object-fit:cover;object-position:center 85%;width:100%}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0 0 20px;font-size:15px}
+.facts dt{font-weight:800;color:var(--ink)}
+.facts dd{margin:0;color:var(--ink-2)}
+.cmp td:first-child{font-weight:700;color:var(--ink-2)}
+
+/* ---------- future ---------- */
+.future-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:900px){.future-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.future-grid{grid-template-columns:1fr}}
+.fcard{border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:20px;background:rgba(255,255,255,.03)}
+.fcard b{font-family:var(--display);font-weight:400;color:var(--lime);font-size:20px;letter-spacing:.04em;display:block;margin-bottom:6px}
+.fcard p{margin:0;font-size:14px;color:#b9c2cd}
+
+/* ---------- footer ---------- */
+footer{background:#070c14;color:#9aa6b4;padding:56px 0 40px;font-size:14px}
+footer h4{color:#fff;margin:0 0 12px;font-size:15px}
+footer ol{margin:0;padding-left:18px}
+footer li{margin:6px 0}
+footer a{color:#c8d3de;word-break:break-word}
+.foot-bottom{margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.to-top{color:var(--lime);text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" aria-label="主選單">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="28" fill="#0d7a3e"/><circle cx="32" cy="32" r="19" fill="none" stroke="#c8f31d" stroke-width="4"/><path d="M13 32h38M32 13v38" stroke="#fff" stroke-width="3.5"/></svg>
+      <span class="zh">無人機足球資訊站</span><span class="en">Drone Soccer Hub</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about"><span class="zh">認識</span><span class="en">About</span></a>
+      <a href="#history"><span class="zh">發展歷程</span><span class="en">History</span></a>
+      <a href="#field"><span class="zh">場地</span><span class="en">Field</span></a>
+      <a href="#specs"><span class="zh">規格</span><span class="en">Specs</span></a>
+      <a href="#rules"><span class="zh">規則</span><span class="en">Rules</span></a>
+      <a href="#format"><span class="zh">賽制</span><span class="en">Format</span></a>
+      <a href="#taiwan"><span class="zh">台灣賽事</span><span class="en">Taiwan</span></a>
+      <a href="#future"><span class="zh">未來</span><span class="en">Future</span></a>
+    </div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-set-lang="zh" aria-pressed="true">中文</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero-img" role="img" aria-label="2025 第一屆天穹盃全國總決賽現場 / 2025 Tianqiong Cup national final"></div>
+  <div class="hero-slash" aria-hidden="true"></div>
+  <span class="photo-credit"><span class="zh">📍 2025 第一屆天穹盃 全國總決賽</span><span class="en">📍 2025 Tianqiong Cup · National Final</span></span>
+  <div class="wrap">
+    <span class="kicker"><span>FAI F9A · Drone Soccer</span></span>
+    <h1>
+      <span class="zh">無人機足球<small>DRONE SOCCER</small></span>
+      <span class="en">Drone Soccer<small>Football, in the air</small></span>
+    </h1>
+    <p class="lead">
+      <span class="zh">把足球搬到空中：兩隊選手遙控包在球形護籠裡的無人機，由「前鋒」穿越對方的空中球門環得分。結合飛行技術、團隊戰術與 STEM 教育的新興運動。</span>
+      <span class="en">Soccer, taken airborne. Two teams pilot drones sealed inside spherical cages, and only the Striker can score by flying through the opponent's hanging goal ring. A new sport that blends piloting skill, team tactics and STEM learning.</span>
+    </p>
+    <div class="stats">
+      <div class="stat"><b>3</b><span class="zh">局定勝負</span><span class="en">sets per match</span></div>
+      <div class="stat"><b>3<i>′</i></b><span class="zh">每局分鐘</span><span class="en">minutes per set</span></div>
+      <div class="stat"><b>3–5</b><span class="zh">每隊上場人數</span><span class="en">active players</span></div>
+      <div class="stat"><b>1</b><span class="zh">名前鋒可得分</span><span class="en">Striker scores</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2><em>What is it</em><span class="zh">什麼是無人機足球？</span><span class="en">What is drone soccer?</span></h2>
+    </div>
+    <div class="intro">
+      <div>
+        <p class="big">
+          <span class="zh">無人機足球是<b>結合遙控無人機飛行與足球的團隊運動</b>。兩隊在封閉的防護籠內對戰，每位選手操控一顆「無人機球」，目標是讓己方前鋒<b>整顆穿過對方的球門環</b>。</span>
+          <span class="en">Drone soccer is <b>a team sport that combines radio-controlled drone flying with soccer</b>. Two teams face off inside a protective cage; each player flies one "drone ball", and the goal is to get your Striker <b>completely through the opponent's goal ring</b>.</span>
+        </p>
+        <p style="color:var(--ink-2);margin:0 0 20px">
+          <span class="zh">一場比賽分三局、每局三分鐘，先拿下兩局的隊伍獲勝。無人機外層包覆塑膠或複合材料的球形護籠，允許碰撞攔截，因此比賽節奏快、身體對抗感強，很像空中的冰上曲棍球。</span>
+          <span class="en">A match is three 3-minute sets; the first team to win two sets wins. Each drone is wrapped in a plastic or composite spherical cage, so body-checking and blocking are part of the game — fast, physical, and a lot like ice hockey in mid-air.</span>
+        </p>
+        <p class="cite"><span class="zh">依據：FAI 運動規章 F9 卷 2026 年版 v1.0，B 章前言、B.4.1</span><span class="en">Source: FAI Sporting Code Vol. F9, 2026 ed. v1.0, Part B preamble & B.4.1</span></p>
+      </div>
+      <div class="roles">
+        <div class="role">
+          <div class="ball" style="background:var(--red)">ST</div>
+          <div>
+            <h4><span class="zh">前鋒 Striker</span><span class="en">Striker</span></h4>
+            <p><span class="zh">全隊唯一可以得分的人。可以守在自己的球門環裡防守。球的後燈會用對方隊色，並可掛彩帶方便辨識。</span><span class="en">The only player who can score. May also sit in their own goal ring to defend. Their rear light uses the opposing team's colour, and a ribbon may hang beneath for visibility.</span></p>
+          </div>
+        </div>
+        <div class="role">
+          <div class="ball" style="background:var(--blue)">DF</div>
+          <div>
+            <h4><span class="zh">其他隊員（掩護／防守）</span><span class="en">Other players (guide / defend)</span></h4>
+            <p><span class="zh">幫前鋒開路、卡位、攔截對方前鋒。穿過對方球門不算分；若為了防守停在自己的球門環內，會被判罰球。</span><span class="en">Clear a path for the Striker, block and intercept the opposing Striker. Flying through the opponent's ring doesn't count; staying inside your own ring to defend concedes a penalty shot.</span></p>
+          </div>
+        </div>
+        <div class="role">
+          <div class="ball" style="background:var(--ink)">C</div>
+          <div>
+            <h4><span class="zh">隊長 Captain</span><span class="en">Captain</span></h4>
+            <p><span class="zh">由場上選手之一擔任，是與裁判溝通的發言人；前鋒墜機時可喊暫停並更換前鋒（每局一次）。</span><span class="en">One of the active players; the team's spokesperson with the referees. If the Striker goes down, the captain may call a time-out and appoint a new Striker (once per set).</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HISTORY ============ -->
+<section id="history" class="dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2><em>Road to the world stage</em><span class="zh">發展歷程：從全州走向世界</span><span class="en">From Jeonju to the world</span></h2>
+      <p><span class="zh">不到十年，無人機足球從韓國一座城市的創意，發展成有國際組織、統一規則與世界錦標賽的運動，並把奧運當作長期目標。</span><span class="en">In under a decade, drone soccer has grown from one Korean city's idea into a sport with international governing bodies, unified rules and world championships — with the Olympics as a long-term ambition.</span></p>
+    </div>
+    <div class="timeline">
+      <div class="tl">
+        <time>2016</time>
+        <h4><span class="zh">誕生於韓國全州</span><span class="en">Born in Jeonju, South Korea</span></h4>
+        <p><span class="zh">無人機足球在韓國全州市出現，全州也因此被稱為「無人機足球之城」。</span><span class="en">Drone soccer emerges in Jeonju, which now calls itself the "city of drone soccer".</span></p>
+      </div>
+      <div class="tl">
+        <time>2017</time>
+        <h4><span class="zh">規則與球體設計定型</span><span class="en">Rules and ball design established</span></h4>
+        <p><span class="zh">全州的 CAMTIC 技術研究院完成比賽規則與無人機球設計。之後韓國國內發展到約 2,500 支隊伍、每年 30 場以上比賽。</span><span class="en">Jeonju's CAMTIC Institute of Technology finalises the rules and ball design. Korea has since grown to roughly 2,500 teams and 30+ competitions a year.</span></p>
+        <p class="src"><a href="https://www.koreajoongangdaily.com/korea/drone-soccer-soars-from-korean-birthplace-of-jeonju-to-ces-and-beyond/12064403" target="_blank" rel="noopener">Korea JoongAng Daily</a></p>
+      </div>
+      <div class="tl">
+        <time>2024.01</time>
+        <h4><span class="zh">登上 CES 國際舞台</span><span class="en">On stage at CES</span></h4>
+        <p><span class="zh">無人機足球在美國拉斯維加斯 CES 展示，推廣者公開表示希望有朝一日進入奧運。</span><span class="en">Drone soccer is showcased at CES in Las Vegas, where promoters say they hope to see it at the Olympics one day.</span></p>
+        <p class="src"><a href="https://techxplore.com/news/2024-01-goal-drone-soccer-aims-high.pdf" target="_blank" rel="noopener">TechXplore / AFP</a></p>
+      </div>
+      <div class="tl">
+        <time>2025.09</time>
+        <h4><span class="zh">台灣：第一屆天穹盃開賽</span><span class="en">Taiwan: first Tianqiong Cup</span></h4>
+        <p><span class="zh">國立臺東專科學校與台灣無人機競技發展協會主辦，分區預賽（東區 9/7 於臺東）後舉行全國總決賽。</span><span class="en">Hosted by National Taitung Junior College and the Taiwan Drone Sports Development Association: regional qualifiers (East region on 7 Sep in Taitung) followed by a national final.</span></p>
+      </div>
+      <div class="tl">
+        <time>2025.09.25–28</time>
+        <h4><span class="zh">FIDA 世界盃・全州</span><span class="en">FIDA World Cup · Jeonju</span></h4>
+        <p><span class="zh">國際無人機足球聯盟（FIDA）在發源地全州舉辦世界盃，預計有 32 國、約 2,500 名選手參加。</span><span class="en">The international drone soccer federation FIDA stages its World Cup in Jeonju, with around 2,500 athletes from 32 countries expected.</span></p>
+        <p class="src"><a href="https://www.businesswire.com/news/home/20250827247820/en/2025-Drone-Soccer-World-Cup-to-Be-Held-in-Jeonju-the-City-of-Drone-Soccer" target="_blank" rel="noopener">Business Wire</a></p>
+      </div>
+      <div class="tl">
+        <time>2025.11.15–18</time>
+        <h4><span class="zh">第一屆 FAI 世界無人機足球錦標賽・上海</span><span class="en">1st FAI World Drone Soccer Championships · Shanghai</span></h4>
+        <p><span class="zh">國際航空運動聯合會（FAI）第一屆世錦賽。40cm 與 20cm 兩個級別的冠亞軍都是中國隊、季軍都是韓國隊；20cm 級首度設立女子組。</span><span class="en">The first FAI world championships. China took gold and silver and Korea bronze in both the 40 cm and 20 cm classes; the 20 cm class featured the first-ever women's division.</span></p>
+        <p class="src"><a href="https://www-2025.fai.org/wdsc" target="_blank" rel="noopener">FAI</a></p>
+      </div>
+      <div class="tl">
+        <time>2026.01</time>
+        <h4><span class="zh">FAI 2026 年版規章生效</span><span class="en">FAI 2026 Sporting Code in force</span></h4>
+        <p><span class="zh">無人機足球列為 F9A「暫定級別（Provisional class）」，與正式級別的無人機競速（F9U）並列於 F9 無人機運動卷。</span><span class="en">Drone soccer is listed as F9A, a Provisional class, alongside the official Drone Racing class (F9U) in Volume F9 Drone Sports.</span></p>
+      </div>
+      <div class="tl">
+        <time>2026</time>
+        <h4><span class="zh">第二屆天穹盃</span><span class="en">2nd Tianqiong Cup</span></h4>
+        <p><span class="zh">第二屆天穹盃擴大舉辦，包含臺北戰等分區賽。</span><span class="en">The second Tianqiong Cup expands, including a Taipei regional event.</span></p>
+      </div>
+      <div class="tl future">
+        <time><span class="zh">未來</span><span class="en">Next</span></time>
+        <h4><span class="zh">目標：奧運？</span><span class="en">Target: the Olympics?</span></h4>
+        <p><span class="zh">目前沒有任何正式的奧運時程。這項運動已具備國際組織、統一規則、世界錦標賽、分齡級別與室內場地等條件，是否能從「暫定級別」升為正式級別，是值得關注的下一步。</span><span class="en">There is no official Olympic timeline yet. The sport already has international bodies, unified rules, world championships, age-friendly classes and indoor venues; whether it moves from "provisional" to "official" class is the next milestone to watch.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FIELD ============ -->
+<section id="field" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2><em>The playing field</em><span class="zh">場地怎麼看</span><span class="en">Reading the field</span></h2>
+      <p><span class="zh">點選場地上的編號，查看各區域的規定。可切換 40cm 成人級與 20cm 青少年級尺寸。</span><span class="en">Tap a numbered marker to see the rules for each zone. Switch between the 40 cm and 20 cm class dimensions.</span></p>
+    </div>
+    <div class="seg" role="group" aria-label="Class">
+      <button type="button" data-class="A" aria-pressed="true"><span class="zh">40cm 成人</span><span class="en">40 cm</span><span class="sub"> · F9A-A</span></button>
+      <button type="button" data-class="B" aria-pressed="false"><span class="zh">20cm 青少年</span><span class="en">20 cm</span><span class="sub"> · F9A-B</span></button>
+    </div>
+    <div class="field-wrap">
+      <div>
+        <svg class="field-svg" viewBox="0 0 1000 580" role="img" aria-label="Top view of the drone soccer field">
+          <defs>
+            <pattern id="stripes" width="120" height="420" patternUnits="userSpaceOnUse">
+              <rect width="60" height="420" fill="#16904b"/><rect x="60" width="60" height="420" fill="#138443"/>
+            </pattern>
+          </defs>
+          <!-- pilot areas -->
+          <g class="hot" data-key="pilot" tabindex="0" role="button" aria-label="Pilots' area">
+            <rect class="hl" x="12" y="150" width="54" height="260" rx="8" fill="#fde3e6" stroke="#e3263a" stroke-width="2" stroke-dasharray="6 5"/>
+            <rect class="hl" x="934" y="150" width="54" height="260" rx="8" fill="#e1ecfd" stroke="#1f6fe5" stroke-width="2" stroke-dasharray="6 5"/>
+          </g>
+          <!-- cage / field -->
+          <g class="hot" data-key="cage" tabindex="0" role="button" aria-label="Flying zone and cage">
+            <rect class="hl" x="80" y="70" width="840" height="420" fill="url(#stripes)" stroke="#0c1420" stroke-width="3"/>
+          </g>
+          <!-- centre line -->
+          <g class="hot" data-key="center" tabindex="0" role="button" aria-label="Centre line">
+            <line class="hl" x1="500" y1="70" x2="500" y2="490" stroke="#fff" stroke-width="4"/>
+            <circle cx="500" cy="280" r="7" fill="#fff"/>
+            <rect x="480" y="70" width="40" height="420" fill="transparent"/>
+          </g>
+          <!-- start areas -->
+          <g class="hot" data-key="start" tabindex="0" role="button" aria-label="Start areas">
+            <rect class="hl" x="80" y="190" width="90" height="180" fill="rgba(255,255,255,.14)" stroke="#fff" stroke-width="3"/>
+            <rect class="hl" x="830" y="190" width="90" height="180" fill="rgba(255,255,255,.14)" stroke="#fff" stroke-width="3"/>
+            <circle cx="112" cy="225" r="12" fill="#e3263a" stroke="#fff" stroke-width="2"/><circle cx="112" cy="280" r="12" fill="#e3263a" stroke="#fff" stroke-width="2"/><circle cx="112" cy="335" r="12" fill="#1f6fe5" stroke="#fff" stroke-width="2"/>
+            <circle cx="888" cy="225" r="12" fill="#1f6fe5" stroke="#fff" stroke-width="2"/><circle cx="888" cy="280" r="12" fill="#1f6fe5" stroke="#fff" stroke-width="2"/><circle cx="888" cy="335" r="12" fill="#e3263a" stroke="#fff" stroke-width="2"/>
+          </g>
+          <!-- goal rings -->
+          <g class="hot" data-key="ring" tabindex="0" role="button" aria-label="Goal rings">
+            <rect class="hl" x="164" y="240" width="12" height="80" rx="6" fill="#e3263a" stroke="#0c1420" stroke-width="2"/>
+            <rect class="hl" x="824" y="240" width="12" height="80" rx="6" fill="#1f6fe5" stroke="#0c1420" stroke-width="2"/>
+            <rect x="150" y="230" width="40" height="100" fill="transparent"/><rect x="810" y="230" width="40" height="100" fill="transparent"/>
+          </g>
+          <!-- attack arrows -->
+          <g aria-hidden="true" opacity=".75">
+            <path d="M300 130 H690" stroke="#e3263a" stroke-width="5" marker-end="url(#ar)" fill="none"/>
+            <path d="M700 430 H310" stroke="#1f6fe5" stroke-width="5" marker-end="url(#ab)" fill="none"/>
+            <defs>
+              <marker id="ar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#e3263a"/></marker>
+              <marker id="ab" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1f6fe5"/></marker>
+            </defs>
+          </g>
+          <!-- dimensions -->
+          <g aria-hidden="true">
+            <line x1="80" y1="522" x2="920" y2="522" stroke="#6b7686" stroke-width="1.5"/>
+            <line x1="80" y1="512" x2="80" y2="532" stroke="#6b7686" stroke-width="1.5"/><line x1="920" y1="512" x2="920" y2="532" stroke="#6b7686" stroke-width="1.5"/>
+            <text class="dim" x="500" y="552" text-anchor="middle" id="dimL">14 m</text>
+            <text class="dim" x="500" y="50" text-anchor="middle" id="dimW">7 m × H 5 m</text>
+          </g>
+          <!-- pins -->
+          <g aria-hidden="true" pointer-events="none">
+            <g transform="translate(39 128)"><circle class="pin-bg" r="15"/><text class="pin" text-anchor="middle" y="5">1</text></g>
+            <g transform="translate(125 168)"><circle class="pin-bg" r="15"/><text class="pin" text-anchor="middle" y="5">2</text></g>
+            <g transform="translate(200 280)"><circle class="pin-bg" r="15"/><text class="pin" text-anchor="middle" y="5">3</text></g>
+            <g transform="translate(528 250)"><circle class="pin-bg" r="15"/><text class="pin" text-anchor="middle" y="5">4</text></g>
+            <g transform="translate(660 460)"><circle class="pin-bg" r="15"/><text class="pin" text-anchor="middle" y="5">5</text></g>
+          </g>
+        </svg>
+        <p class="field-hint"><span class="zh">俯視圖。紅隊由左往右進攻藍色球門環，藍隊反之；兩隊的前鋒各用對方隊色標示。</span><span class="en">Top view. Red attacks the blue ring on the right, blue attacks the red ring on the left; each Striker is marked in the opposing team's colour.</span></p>
+      </div>
+      <aside class="info" id="info" aria-live="polite"></aside>
+    </div>
+
+    <div class="flow">
+      <div class="step"><h4><span class="zh">Arm your quads</span><span class="en">"Arm your quads"</span></h4><p><span class="zh">兩隊就位後，裁判喊出口令，約 3–5 秒後聲響開賽。提前起飛會被判罰球。</span><span class="en">With both teams ready, the referee calls it out; a sound signal starts play about 3–5 s later. Taking off early concedes a penalty shot.</span></p></div>
+      <div class="step"><h4><span class="zh">前鋒穿環</span><span class="en">Striker goes through</span></h4><p><span class="zh">前鋒整顆球須朝對方底線方向完整穿過球門環才算得分，由計分裁判判定。</span><span class="en">The whole Striker ball must pass fully through the ring towards the opponent's baseline. The scoring referee decides.</span></p></div>
+      <div class="step"><h4><span class="zh">全隊回半場</span><span class="en">Everyone resets</span></h4><p><span class="zh">得分後全隊須立刻回到己方半場。對手可以阻擋你回去，拖延你下一次得分。</span><span class="en">After a goal, the whole team must return to its own half. Opponents are allowed to block you and delay your next goal.</span></p></div>
+      <div class="step"><h4><span class="zh">再次進攻</span><span class="en">Attack again</span></h4><p><span class="zh">全員回到半場後才能再得分。沒回去就得分，那一分不算，還會被判罰球。</span><span class="en">Only then can you score again. Scoring without resetting doesn't count and concedes a penalty shot.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPECS ============ -->
+<section id="specs">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2><em>Two classes</em><span class="zh">兩種級別與裝備規格</span><span class="en">Two classes & equipment specs</span></h2>
+      <p><span class="zh">FAI 把無人機足球分為 40cm 與 20cm 兩個子級別，兩者規則相同，只有尺寸不同。20cm 級球更輕、場地更小，適合青少年與初學者。</span><span class="en">FAI splits drone soccer into two sub-classes, 40 cm and 20 cm. The rules are identical, only the sizes differ; the lighter 20 cm class on a smaller field suits young players and beginners.</span></p>
+    </div>
+    <div class="spec">
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th><span class="zh">項目</span><span class="en">Item</span></th><th class="a">F9A-A · 40 cm</th><th class="b">F9A-B · 20 cm</th></tr></thead>
+          <tbody>
+            <tr><th><span class="zh">護籠直徑</span><span class="en">Frame diameter</span></th><td><b>40</b> cm（≤42）</td><td><b>20</b> cm（≤22）</td></tr>
+            <tr><th><span class="zh">總重上限</span><span class="en">Max weight</span></th><td><b>1.2</b> kg</td><td><b>300</b> g</td></tr>
+            <tr><th><span class="zh">電池</span><span class="en">Battery</span></th><td><span class="zh">最高</span><span class="en">up to</span> <b>6S</b></td><td><span class="zh">最高</span><span class="en">up to</span> <b>4S</b></td></tr>
+            <tr><th><span class="zh">螺旋槳直徑</span><span class="en">Propeller</span></th><td>≤ <b>6″</b>（15.2 cm）</td><td>≤ <b>3″</b>（7.6 cm）</td></tr>
+            <tr><th><span class="zh">LED 燈條</span><span class="en">LED strip</span></th><td>≥ <b>40</b> <span class="zh">顆</span><span class="en">LEDs</span></td><td>≥ <b>16</b> <span class="zh">顆</span><span class="en">LEDs</span></td></tr>
+            <tr><th><span class="zh">飛行區（長×寬×高）</span><span class="en">Flying zone (L×W×H)</span></th><td><b>14×7×5</b> m</td><td><b>6×3×3</b> m</td></tr>
+            <tr><th><span class="zh">球門環（外徑／內徑）</span><span class="en">Goal ring (outer / inner)</span></th><td><b>100 / 60</b> cm</td><td><b>70 / 40</b> cm</td></tr>
+            <tr><th><span class="zh">球門環厚度</span><span class="en">Ring thickness</span></th><td>≤ 20 cm</td><td>≤ 10 cm</td></tr>
+            <tr><th><span class="zh">球門環距底線</span><span class="en">Ring from baseline</span></th><td>1.5 m</td><td>1 m</td></tr>
+            <tr><th><span class="zh">起飛區寬度</span><span class="en">Start area width</span></th><td><span class="zh">約</span><span class="en">≈</span> 1.5 m</td><td>≤ 1 m</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figure class="fig">
+        <img src="assets/fai-equipment.jpg" alt="FAI 國際賽制專業無人機足球設備：20cm 青少年球與 6×3×3m 場地、40cm 成人球與 14×7×5m 場地" loading="lazy" width="1400" height="1996">
+        <figcaption><span class="zh">兩種級別的球、遙控器與場地示意</span><span class="en">Balls, transmitters and fields for both classes</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="grid g3" style="margin-top:32px">
+      <div class="card"><span class="tag">B.1.1</span><h3><span class="zh">球形護籠</span><span class="en">Spherical cage</span></h3><p><span class="zh">用塑膠或複合材料製作，禁止金屬。所有零件都要包在籠內、不得突出；每個開孔面積不超過 150 cm²；底部可以做成 2 cm 以內的平面方便放穩。</span><span class="en">Plastic or composite, never metal. Every component must sit inside the cage with nothing protruding; each opening is at most 150 cm²; the bottom may be flattened (≤ 2 cm) so the ball sits steady.</span></p></div>
+      <div class="card"><span class="tag">B.1.2–1.4</span><h3><span class="zh">動力與遙控</span><span class="en">Power & radio</span></h3><p><span class="zh">只能用電動馬達，最多 4 顆；每顆電芯充飽不超過 4.25 V。螺旋槳禁用金屬。使用 2.4 GHz 展頻遙控。</span><span class="en">Electric motors only, max four; each cell ≤ 4.25 V fully charged. No metal propellers. 2.4 GHz spread-spectrum radio.</span></p></div>
+      <div class="card"><span class="tag red">B.1</span><h3><span class="zh">安全與禁止事項</span><span class="en">Safety & bans</span></h3><p><span class="zh">必須有失控保護裝置，一啟動就停止馬達。禁止預先寫好的飛行動作與自動定位；翻機復位（turtle mode）這類由選手啟動的功能可以使用。</span><span class="en">A fail-safe that stops the motors is mandatory. Pre-programmed manoeuvres and automatic positioning are banned; pilot-activated recovery such as turtle mode is allowed.</span></p></div>
+      <div class="card"><span class="tag blue">B.1.5</span><h3><span class="zh">紅藍燈光</span><span class="en">Red vs blue lights</span></h3><p><span class="zh">兩隊一紅一藍，燈條沿主框一圈，從任何角度都要看得見。球的後方另外裝至少 6 顆 LED，每顆球顏色都不同，讓選手認出自己的球。</span><span class="en">One team red, one blue, with the LED strip around the main frame and visible from any angle. A rear unit of at least 6 LEDs gives each ball its own colour so pilots can find theirs.</span></p></div>
+      <div class="card"><span class="tag lime">B.1.6</span><h3><span class="zh">前鋒辨識</span><span class="en">Spotting the Striker</span></h3><p><span class="zh">前鋒的後燈用對方隊色（紅隊前鋒亮藍、藍隊前鋒亮紅）。主辦單位也可以要求前鋒在球底掛彩帶。</span><span class="en">The Striker's rear light takes the opposing colour (blue for red team, red for blue team). Organisers may also require a ribbon hanging under the Striker.</span></p></div>
+      <div class="card"><span class="tag ink">B.3</span><h3><span class="zh">球門環</span><span class="en">Goal rings</span></h3><p><span class="zh">圓形、一紅一藍，固定在防護籠頂部，面向場中央並彼此平行。材質要夠堅固，又要有彈性，才不會撞壞球。可以加裝電子進球感測器。</span><span class="en">Circular, one red and one blue, hung securely from the cage ceiling, facing centre and parallel. Strong yet flexible so balls aren't damaged. Electronic goal sensors are allowed.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RULES ============ -->
+<section id="rules" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <h2><em>Rules quick reference</em><span class="zh">規則速查</span><span class="en">Rules at a glance</span></h2>
+      <p><span class="zh">以下整理自 FAI 2026 年版 F9A 規則，括號內為原文條號。正式比賽請以主辦單位公告及 FAI 原文為準。</span><span class="en">Summarised from the FAI 2026 F9A rules, with clause numbers in brackets. For actual events, the organiser's announcements and the original FAI text prevail.</span></p>
+    </div>
+
+    <div class="ladder">
+      <div class="rung r1"><h4><span class="zh">罰球</span><span class="en">Penalty shot</span></h4><p><span class="zh">前鋒對上 1 名防守者，有 10 秒可以射門，不計入該局時間。</span><span class="en">Striker vs one defender, 10 seconds, clock stopped.</span></p></div>
+      <div class="rung r2"><h4><span class="zh">警告</span><span class="en">Warning</span></h4><p><span class="zh">輕微違規。同一原因累積 2 次會升為黃牌。</span><span class="en">Minor offence. Two for the same reason = yellow.</span></p></div>
+      <div class="rung r3"><h4><i class="card-ico"></i><span class="zh">黃牌</span><span class="en">Yellow card</span></h4><p><span class="zh">該名選手本局剩下的時間都不能上場。</span><span class="en">The player sits out the rest of the set.</span></p></div>
+      <div class="rung r4"><h4><i class="card-ico" style="background:#fff"></i><span class="zh">紅牌</span><span class="en">Red card</span></h4><p><span class="zh">該名選手整場比賽都不能再上場，全隊少一顆球。</span><span class="en">Out for the rest of the match; team plays one drone short.</span></p></div>
+    </div>
+
+    <div class="rules">
+      <details class="rule" open>
+        <summary><span class="code">B.8 / B.8.2</span><span class="zh">比賽與開賽</span><span class="en">Match & start</span></summary>
+        <div class="body"><ul>
+          <li class="zh">一場比賽分 3 局，每局 3 分鐘；局間休息約 2–3 分鐘，用來撿球、換電池。</li><li class="en">A match is 3 sets of 3 minutes; breaks of about 2–3 minutes to retrieve balls and swap batteries.</li>
+          <li class="zh">比賽前擲硬幣決定場邊，整場都不換邊。戶外比賽如果風的影響太大，裁判可以要求換邊。</li><li class="en">A coin toss decides sides, kept for the whole match. Outdoors, the referee may order a swap if wind is a significant factor.</li>
+          <li class="zh">開賽程序：確認兩隊就緒 → 裁判喊「Arm your quads」→ 約 3–5 秒後聲響開賽。</li><li class="en">Start: both captains confirm → "Arm your quads" → sound signal about 3–5 s later.</li>
+          <li class="zh">聲響前球離地算提前起飛，要重新開賽，並判給對方罰球。</li><li class="en">A ball leaving the ground before the signal is an early start: restart, and a penalty shot against that team.</li>
+        </ul></div>
+      </details>
+      <details class="rule">
+        <summary><span class="code">B.8.4</span><span class="zh">得分</span><span class="en">Scoring</span></summary>
+        <div class="body"><ul>
+          <li class="zh">只有前鋒能得分：整顆球朝對方底線方向完整穿過整個球門環才算。</li><li class="en">Only the Striker scores: the entire ball must pass through the entire ring towards the opponent's baseline.</li>
+          <li class="zh">由計分裁判判定，使用電子計分時也是一樣。</li><li class="en">The scoring referee decides, even when electronic scoring is used.</li>
+          <li class="zh">其他隊員穿過對方球門不算分，但也不會被罰。</li><li class="en">A non-Striker going through the opponent's ring scores nothing, and is not penalised.</li>
+          <li class="zh">得分後全隊要回到己方半場；沒回去就判罰球，接著的進球也不算。</li><li class="en">After a goal all players must return to their half; failing that concedes a penalty shot and the following goal is void.</li>
+          <li class="zh">對手可以阻擋得分隊伍回半場。掉在地上飛不起來的球，本局剩下的時間都不能再參與。</li><li class="en">Opponents may block the return. A grounded ball that can't fly back is out for the rest of the set.</li>
+          <li class="zh">前鋒可以待在自己的球門環裡防守；其他隊員為了防守穿過或停在自己的球門環內，會被判罰球。</li><li class="en">The Striker may defend inside their own ring; any other player crossing or staying in their own ring to defend concedes a penalty shot.</li>
+        </ul></div>
+      </details>
+      <details class="rule">
+        <summary><span class="code">B.8.5</span><span class="zh">安全事件與換前鋒</span><span class="en">Safety & replacing the Striker</span></summary>
+        <div class="body"><ul>
+          <li class="zh">球失控、損壞或無法安全飛行時，選手要啟動失控保護，落地後通知裁判並離開操作區，全隊在本局剩下的時間少一人比賽。</li><li class="en">If a ball can't fly safely, the pilot triggers the fail-safe, informs the referee once it's down and leaves the pilots' area; the team plays short-handed for the rest of the set.</li>
+          <li class="zh">如果倒下的是前鋒，隊長可以請求暫停：全員降落後改派另一名選手當前鋒，每局只能換一次。</li><li class="en">If it's the Striker, the captain may call a time-out: all balls land, and another player becomes Striker — once per set.</li>
+        </ul></div>
+      </details>
+      <details class="rule">
+        <summary><span class="code">B.8.6</span><span class="zh">勝負判定</span><span class="en">Set & match result</span></summary>
+        <div class="body"><ul>
+          <li class="zh">每局進球多的隊伍贏得該局，同分就是平手；先贏 2 局的隊伍獲勝。</li><li class="en">More goals wins the set; equal goals is a tie. Two sets won wins the match.</li>
+          <li class="zh">需要分出勝負時，依賽前公告的方式決定：延長賽（先進球的隊伍獲勝，即黃金進球）、PK 大賽（例如 5 輪，盡量由不同選手主射）或擲硬幣。</li><li class="en">When a winner is needed, a pre-announced method applies: golden-goal overtime, a penalty shoot-out (e.g. 5 shots, different shooters where possible), or a coin toss.</li>
+        </ul></div>
+      </details>
+      <details class="rule">
+        <summary><span class="code">B.9.1</span><span class="zh">罰球的情況</span><span class="en">When a penalty shot is given</span></summary>
+        <div class="body"><ul>
+          <li class="zh">提前起飛。</li><li class="en">Early start.</li>
+          <li class="zh">得分後沒有全員回到半場。</li><li class="en">Not returning to own half after scoring.</li>
+          <li class="zh">前鋒以外的隊員為了防守穿過或停在自己的球門環內。</li><li class="en">A non-Striker crossing or sitting in their own ring to defend.</li>
+          <li class="zh">由主辦單位賽前公告，罰球也可以集中在局末用剩下的電量進行。</li><li class="en">If pre-announced, penalty shots may be taken at the end of the set with remaining battery.</li>
+        </ul></div>
+      </details>
+      <details class="rule">
+        <summary><span class="code">B.9.2–B.9.4</span><span class="zh">警告、黃牌、紅牌</span><span class="en">Warnings, yellow & red cards</span></summary>
+        <div class="body">
+          <p style="margin:0 0 6px"><b><span class="zh">警告</span><span class="en">Warning</span></b></p>
+          <ul>
+            <li class="zh">非上場人員（例如替補、教練）在比賽中進入操作區。</li><li class="en">Unauthorised person (reserve, coach…) in the pilots' area during a set.</li>
+            <li class="zh">輕微的不文明行為；未經裁判同意拖延比賽；開賽前球只有輕微移動（還不算提前起飛）。</li><li class="en">Minor misconduct; unapproved delay; small movement before the signal that isn't an early start.</li>
+            <li class="zh">飛行中的球不小心撞到地上的球，或不小心撞到人。</li><li class="en">Unintentional contact with a grounded ball or with a person.</li>
+          </ul>
+          <p style="margin:12px 0 6px"><b><span class="zh">黃牌</span><span class="en">Yellow card</span></b></p>
+          <ul>
+            <li class="zh">同一原因被警告 2 次；比賽中更換上場選手；嚴重不文明行為。</li><li class="en">Two warnings for the same reason; changing an active player mid-set; major misconduct.</li>
+            <li class="zh">比賽中故意用手操弄球；故意撞擊地上的球或撞人。</li><li class="en">Deliberately handling a ball mid-set; intentional contact with a grounded ball or a person.</li>
+          </ul>
+          <p style="margin:12px 0 6px"><b><span class="zh">紅牌</span><span class="en">Red card</span></b></p>
+          <ul>
+            <li class="zh">同一場累積 2 張黃牌；上場選手不在登錄名單上。</li><li class="en">Two yellows in a match; an active player not on the registered list.</li>
+            <li class="zh">非常嚴重的不文明行為；危險的飛行或動作。</li><li class="en">Severe misconduct; dangerous or hazardous behaviour.</li>
+          </ul>
+        </div>
+      </details>
+      <details class="rule">
+        <summary><span class="code">B.4 / B.5</span><span class="zh">隊伍與備用球</span><span class="en">Team roster & spare balls</span></summary>
+        <div class="body"><ul>
+          <li class="zh">兩隊上場人數相同，都是 3–5 人，由主辦單位公告；登錄名單為上場人數再加 2 名替補。</li><li class="en">3–5 active players, same for both teams, set by the organiser; the roster may add 2 reserves.</li>
+          <li class="zh">名單最晚要在第一場比賽前 30 分鐘交出，賽事開始後就不能更改。教練不算隊員。</li><li class="en">Roster due no later than 30 minutes before the first match and frozen once the event starts. Coaches aren't team members.</li>
+          <li class="zh">每位選手最多準備 2 顆球，備用球不能裝著電池；只有局間休息時可以換球或換電池。</li><li class="en">Each player may bring up to 2 balls; the spare must not carry a battery. Balls and batteries can only be swapped between sets.</li>
+          <li class="zh">只能在局間休息時換人。</li><li class="en">Substitutions only between sets.</li>
+        </ul></div>
+      </details>
+      <details class="rule">
+        <summary><span class="code">B.10 / B.12</span><span class="zh">中斷與裁判</span><span class="en">Interruptions & officials</span></summary>
+        <div class="body"><ul>
+          <li class="zh">戶外比賽如果在場地中央離地 2 m 處測到的風速連續 1 分鐘超過 9 m/s，就要中斷比賽。</li><li class="en">Outdoors, play stops if wind at 2 m above the centre stays above 9 m/s for at least one minute.</li>
+          <li class="zh">比賽中斷後，該局要整局重賽；如果是某一隊造成中斷，由該隊判負。</li><li class="en">An interrupted set is replayed in full, unless one team caused it — that team loses the set.</li>
+          <li class="zh">裁判編制：賽事總監、主裁判、場上裁判，以及場地兩側各一名計分裁判。官方錄影不能用來在比賽中做判決。</li><li class="en">Officials: event director, main referee, match referee and one scoring referee on each side. Official video can't be used for in-match decisions.</li>
+        </ul></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FORMAT ============ -->
+<section id="format">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">06</span>
+      <h2><em>Event format</em><span class="zh">賽制</span><span class="en">Tournament format</span></h2>
+      <p><span class="zh">主辦單位最晚要在賽前一個月公告賽制，主要有以下兩種。</span><span class="en">Organisers announce the format at least one month ahead. Two main formats exist.</span></p>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <span class="tag">B.7.1</span>
+        <h3><span class="zh">分組循環 → 淘汰賽 → 決賽</span><span class="en">Groups → knockout → final</span></h3>
+        <p><span class="zh">以抽籤分組，每組建議 3–5 隊，組內每隊互相比賽一次。</span><span class="en">Blind-drawn groups of 3–5 teams; everyone plays everyone in the group.</span></p>
+        <div class="points">
+          <div class="pt"><b>3</b><span class="zh">勝</span><span class="en">Win</span></div>
+          <div class="pt"><b>1</b><span class="zh">和</span><span class="en">Draw</span></div>
+          <div class="pt"><b>0</b><span class="zh">敗</span><span class="en">Loss</span></div>
+        </div>
+        <p style="margin-bottom:8px"><span class="zh">每組前 2 名晉級淘汰賽。排名依據：</span><span class="en">Top two advance. Ranking by:</span></p>
+        <ol class="clean">
+          <li><span class="zh">總積分</span><span class="en">Total points</span></li>
+          <li><span class="zh">淨勝球</span><span class="en">Goal difference</span></li>
+          <li><span class="zh">總進球數</span><span class="en">Goals scored</span></li>
+          <li><span class="zh">仍然同分就用 PK 大賽決定</span><span class="en">Penalty shoot-out if still tied</span></li>
+        </ol>
+        <p class="cite" style="margin-top:12px"><span class="zh">範例：16 隊分成 4 組，共 32 場；24 隊分成 8 組，共 40 場。</span><span class="en">Example: 16 teams → 4 groups, 32 matches; 24 teams → 8 groups, 40 matches.</span></p>
+      </div>
+      <div class="card">
+        <span class="tag ink">B.7.2</span>
+        <h3><span class="zh">連續輪次制</span><span class="en">Successive rounds</span></h3>
+        <p style="margin-bottom:12px"><span class="zh">每一輪重新抽籤，勝隊晉級下一輪，比賽場數較少，適合時間有限的賽事。</span><span class="en">A fresh blind draw each round; winners advance. Fewer matches, so it suits tighter schedules.</span></p>
+        <ul class="clean" style="padding-left:20px;color:var(--ink-2)">
+          <li><span class="zh"><b>單淘汰</b>：輸一場就淘汰。</span><span class="en"><b>Single elimination</b>: one loss and you're out.</span></li>
+          <li><span class="zh"><b>雙敗淘汰</b>：輸兩場才淘汰。</span><span class="en"><b>Double elimination</b>: out after two losses.</span></li>
+          <li><span class="zh">隊伍數是單數時，最後抽到的隊伍這一輪輪空，下一輪要打兩場。</span><span class="en">With an odd count, the last team drawn sits out and plays twice next round.</span></li>
+          <li><span class="zh">盡量避免同樣兩隊重複對戰。</span><span class="en">Repeat pairings are avoided where possible.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAIWAN ============ -->
+<section id="taiwan" class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">07</span>
+      <h2><em>Taiwan · Event recap</em><span class="zh">台灣賽事回顧：2025 第一屆天穹盃</span><span class="en">Recap: 2025 Tianqiong Cup</span></h2>
+      <p><span class="zh">天穹盃是台灣推廣無人機足球（又稱「無人機飛球」）的全國性賽事，開放國小到社會人士參加，先舉辦分區預賽，再進行全國總決賽。</span><span class="en">The Tianqiong Cup is Taiwan's national drone soccer ("drone ball") championship, open from primary-school pupils to adults, with regional qualifiers leading to a national final.</span></p>
+    </div>
+    <div class="event">
+      <figure class="fig">
+        <img src="assets/tianqiong-2025-final.jpg" alt="2025 第一屆天穹盃全國總決賽現場，A、B 雙場地與裁判" loading="lazy" width="2000" height="1500">
+        <figcaption><span class="zh">2025 第一屆天穹盃全國總決賽現場：A、B 兩個場地同時進行，旁邊立有規則看板</span><span class="en">2025 Tianqiong Cup national final: courts A and B running side by side, with rule boards on display</span></figcaption>
+      </figure>
+      <div>
+        <dl class="facts">
+          <dt><span class="zh">主辦</span><span class="en">Hosts</span></dt><dd><span class="zh">國立臺東專科學校、台灣無人機競技發展協會</span><span class="en">National Taitung Junior College; Taiwan Drone Sports Development Association</span></dd>
+          <dt><span class="zh">組別</span><span class="en">Divisions</span></dt><dd><span class="zh">國小組、國中組、無限組（高中職、大專、社會人士混合）</span><span class="en">Primary, junior high, and open (senior high, university, adults)</span></dd>
+          <dt><span class="zh">隊伍</span><span class="en">Teams</span></dt><dd><span class="zh">每隊 3 人：1 名得分手（用緞帶標記）加 2 名掩護手</span><span class="en">3 per team: 1 scorer (ribbon-marked) + 2 support players</span></dd>
+          <dt><span class="zh">賽程</span><span class="en">Path</span></dt><dd><span class="zh">各分區各組前 3 名晉級全國總決賽</span><span class="en">Top 3 of each division in each region reach the national final</span></dd>
+          <dt><span class="zh">指定球</span><span class="en">Ball</span></dt><dd><span class="zh">總決賽使用協會指定的 20cm 級飛球（直徑約 200 mm、約 100 g）</span><span class="en">Final uses the association's designated 20 cm-class ball (≈ 200 mm, ≈ 100 g)</span></dd>
+        </dl>
+        <h3 style="margin:0 0 10px;font-size:18px"><span class="zh">與 FAI 規則的主要差異</span><span class="en">Key differences from FAI rules</span></h3>
+        <div class="table-scroll">
+          <table class="cmp" style="min-width:420px">
+            <thead><tr><th></th><th>FAI F9A-B</th><th><span class="zh">天穹盃 2025</span><span class="en">Tianqiong 2025</span></th></tr></thead>
+            <tbody>
+              <tr><td><span class="zh">場地</span><span class="en">Field</span></td><td>6×3×3 m</td><td>6×3×3 m</td></tr>
+              <tr><td><span class="zh">上場人數</span><span class="en">Players</span></td><td>3–5</td><td>3</td></tr>
+              <tr><td><span class="zh">球門位置</span><span class="en">Ring position</span></td><td><span class="zh">距底線 1 m</span><span class="en">1 m from baseline</span></td><td><span class="zh">距底線 1.2 m，底端離地 2.4 m</span><span class="en">1.2 m in, bottom 2.4 m high</span></td></tr>
+              <tr><td><span class="zh">犯規處理</span><span class="en">Fouls</span></td><td><span class="zh">罰球、警告、黃牌、紅牌</span><span class="en">Penalty shot / cards</span></td><td><span class="zh">違規記點，每累積 2 點扣 1 分</span><span class="en">Foul points: −1 goal per 2 points</span></td></tr>
+              <tr><td><span class="zh">防守限制</span><span class="en">Defending</span></td><td><span class="zh">非前鋒不得為防守穿過或停在自家球門環</span><span class="en">Non-Strikers may not defend inside own ring</span></td><td><span class="zh">掩護手在自家球門內懸停超過 3 秒記 1 點</span><span class="en">Support hovering in own ring > 3 s = 1 point</span></td></tr>
+              <tr><td><span class="zh">同分處理</span><span class="en">Tie-break</span></td><td><span class="zh">延長賽、PK 大賽或擲硬幣</span><span class="en">Overtime / shoot-out / coin toss</span></td><td><span class="zh">各派 1 人比誰先得分</span><span class="en">1-v-1 next-goal race</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cite" style="margin-top:10px"><span class="zh">天穹盃資料依據第一屆分區報名簡章（東區），實際規則以主辦單位公告為準。</span><span class="en">Tianqiong Cup details from the 1st-edition regional (East) entry guide; organiser announcements prevail.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FUTURE ============ -->
+<section id="future" class="dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num">08</span>
+      <h2><em>What's next</em><span class="zh">未來展望：AI 與數位孿生</span><span class="en">Looking ahead: AI & digital twins</span></h2>
+      <p><span class="zh">無人機足球同時結合空間座標、物理、控制與團隊戰術，因此也很適合當作 AI 研究與教育的平台。目前已經有團隊在規劃「AI 無人機競技場」這類研發與教育計畫。</span><span class="en">Because drone soccer combines spatial coordinates, physics, control and team tactics, it also makes a natural platform for AI research and education. "AI drone arena" projects are already being planned.</span></p>
+    </div>
+    <div class="future-grid">
+      <div class="fcard"><b>DIGITAL TWIN</b><p><span class="zh">先在 VR 或 3D 環境中重建球場、球和物理規則，可以安全地大量測試與回放比賽。</span><span class="en">Rebuild the arena, balls and physics in VR/3D first, for safe, repeatable testing and replay.</span></p></div>
+      <div class="fcard"><b>WORLD STATE</b><p><span class="zh">把每顆球的位置、速度、姿態和時間戳整合成統一的全場資料。</span><span class="en">A unified live picture of every ball's position, velocity, attitude and timestamp.</span></p></div>
+      <div class="fcard"><b>AI COACH</b><p><span class="zh">從全場視角判斷局勢，像場邊教練一樣調度盯防、攔截、進攻等戰術。</span><span class="en">A bird's-eye tactician that calls marking, interception and attack like a coach on the sideline.</span></p></div>
+      <div class="fcard"><b>SKILL-BASED FLIGHT</b><p><span class="zh">把複雜的飛行拆成一個個可以測試、組合的技能，例如緊盯防守、假動作、加速射門。</span><span class="en">Complex flight broken into testable, combinable skills such as tight marking, feints and sprint-to-score.</span></p></div>
+    </div>
+    <p class="note" style="margin-top:28px"><span class="zh"><b>注意：</b>FAI 規則（B.1）禁止預先寫好的飛行動作和自動定位。上面提到的 AI 應用屬於訓練、教育與展示用途，<b>不適用於正式 FAI 比賽</b>。</span><span class="en"><b>Note:</b> FAI rule B.1 bans pre-programmed manoeuvres and automatic positioning. The AI applications above are for training, education and exhibition, <b>not for official FAI competition</b>.</span></p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="grid g2">
+      <div>
+        <h4><span class="zh">關於本站</span><span class="en">About this site</span></h4>
+        <p style="margin:0"><span class="zh">本站是中立的無人機足球資訊整理，與 FAI、FIDA 或任何賽事主辦單位都沒有隸屬關係。規則內容是摘要，正式比賽請以原文和主辦單位公告為準。</span><span class="en">An independent drone soccer information page, not affiliated with FAI, FIDA or any event organiser. Rules are summaries; for competition, the original texts and organiser announcements prevail.</span></p>
+      </div>
+      <div>
+        <h4><span class="zh">資料來源</span><span class="en">Sources</span></h4>
+        <ol>
+          <li>FAI Sporting Code, Section 4, Volume F9 Drone Sports, 2026 Edition v1.0 — Part B: F9A Drone Soccer Rules</li>
+          <li><a href="https://www-2025.fai.org/wdsc" target="_blank" rel="noopener">FAI — 2025 World Drone Soccer Championships</a></li>
+          <li><a href="https://www.koreajoongangdaily.com/korea/drone-soccer-soars-from-korean-birthplace-of-jeonju-to-ces-and-beyond/12064403" target="_blank" rel="noopener">Korea JoongAng Daily — Drone soccer soars from Korean birthplace of Jeonju</a></li>
+          <li><a href="https://www.businesswire.com/news/home/20250827247820/en/2025-Drone-Soccer-World-Cup-to-Be-Held-in-Jeonju-the-City-of-Drone-Soccer" target="_blank" rel="noopener">Business Wire — 2025 Drone Soccer World Cup in Jeonju</a></li>
+          <li><a href="https://techxplore.com/news/2024-01-goal-drone-soccer-aims-high.pdf" target="_blank" rel="noopener">TechXplore / AFP — Drone soccer aims high at CES</a></li>
+          <li><a href="https://coce.nttu.edu.tw/var/file/5/1005/attach/22/pta_183494_3910826_14650.pdf" target="_blank" rel="noopener">2025 第一屆天穹盃無人機飛球錦標賽 東區報名簡章</a></li>
+        </ol>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 <span class="zh">無人機足球資訊站</span><span class="en">Drone Soccer Hub</span></span>
+      <a class="to-top" href="#top"><span class="zh">回到頂端 ↑</span><span class="en">Back to top ↑</span></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var lang = 'zh', cls = 'A', current = 'ring';
+
+  var SPEC = {
+    A:{L:'14 m', W:'7 m × H 5 m', field:'14 × 7 m，籠高 5 m', fieldEn:'14 × 7 m, cage 5 m high', ring:'外徑 100 cm／內徑 60 cm，厚度 ≤ 20 cm', ringEn:'outer 100 cm / inner 60 cm, ≤ 20 cm thick', ringPos:'1.5 m', start:'約 1.5 m', startEn:'about 1.5 m'},
+    B:{L:'6 m', W:'3 m × H 3 m', field:'6 × 3 m，籠高 3 m', fieldEn:'6 × 3 m, cage 3 m high', ring:'外徑 70 cm／內徑 40 cm，厚度 ≤ 10 cm', ringEn:'outer 70 cm / inner 40 cm, ≤ 10 cm thick', ringPos:'1 m', start:'不超過 1 m', startEn:'no more than 1 m'}
+  };
+
+  function info(key){
+    var s = SPEC[cls];
+    var d = {
+      pilot:{n:1, code:'B.2.3', zh:['選手操作區', '<p>位於防護籠外側的兩個短邊，一隊一邊，兩邊的位置和大小相同。</p><ul><li>比賽進行中，只有正在上場的選手可以待在操作區。</li><li>替補或教練進入操作區會被警告。</li><li>擲硬幣獲勝的隊伍可以選邊，整場比賽都不換邊。</li></ul>'],
+             en:["Pilots' area", '<p>Outside the cage on the two short sides, one per team, identical in location and size.</p><ul><li>Only active players may be inside during a set.</li><li>Reserves or coaches entering earn a warning.</li><li>The coin-toss winner picks a side, kept for the whole match.</li></ul>']},
+      start:{n:2, code:'B.2.2', zh:['起飛區', '<p>畫在兩端底線的中段，兩隊的位置和大小相同。</p><ul><li>寬度 '+s.start+'，長度依球的尺寸和上場人數決定。</li><li>每局開始時，所有球都從這裡起飛。</li><li>換上新前鋒時，他的球要放回起飛區。</li></ul>'],
+             en:['Start area', '<p>Marked at the middle of each baseline, identical for both teams.</p><ul><li>Width '+s.startEn+'; length depends on ball size and number of players.</li><li>Every set starts with all balls here.</li><li>A newly appointed Striker\'s ball is placed back here.</li></ul>']},
+      ring:{n:3, code:'B.3', zh:['球門環', '<p>固定在防護籠頂部，懸在空中，距底線 <b>'+s.ringPos+'</b>，面向場地中央，兩個球門環彼此平行。</p><ul><li>'+s.ring+'。</li><li>一紅一藍，可以加燈光提高辨識度。</li><li>前鋒要朝對方底線方向完整穿過球門環才算得分。</li><li>可以加裝電子進球感測器，但最後仍由計分裁判判定。</li></ul>'],
+             en:['Goal ring', '<p>Hung from the cage ceiling <b>'+s.ringPos+'</b> inside the baseline, facing centre, the two rings parallel.</p><ul><li>'+s.ringEn+'.</li><li>One red, one blue; lighting may be added.</li><li>The Striker must pass fully through towards the opponent\'s baseline.</li><li>Electronic sensors may help, but the scoring referee decides.</li></ul>']},
+      center:{n:4, code:'B.2.2 / B.8.4', zh:['中線', '<p>連接兩條長邊中點的實線，把場地分成兩個半場，中點另外標示。</p><ul><li>得分後，全隊要飛回自己的半場，才能再次得分。</li><li>對手可以在這裡攔截，阻止你回半場。</li></ul>'],
+             en:['Centre line', '<p>A solid line joining the midpoints of the long sides, splitting the field in two halves; the centre spot is marked.</p><ul><li>After a goal, the whole team must get back behind it before scoring again.</li><li>Opponents may block that return.</li></ul>']},
+      cage:{n:5, code:'B.2.1–2.2', zh:['飛行區與防護籠', '<p>建議尺寸：<b>'+s.field+'</b>。如果採用其他尺寸，長邊必須是短邊的兩倍。</p><ul><li>四周和上方都要用防護網圍起來，比賽中任何人都不能進入籠內。</li><li>籠子的硬質骨架要包上緩衝材料。</li><li>地面要平整，避免使用柏油、水泥這類太硬的地面。</li><li>可以辦在室內，也可以辦在戶外。</li></ul>'],
+             en:['Flying zone & cage', '<p>Recommended: <b>'+s.fieldEn+'</b>. Other sizes must keep length = 2 × width.</p><ul><li>Fully netted; nobody inside during a set.</li><li>Hard cage parts padded with shock-absorbing material.</li><li>Flat ground; avoid asphalt or concrete.</li><li>Indoor or outdoor.</li></ul>']}
+    }[key];
+    var t = d[lang];
+    return '<span class="tag">'+d.n+' · '+d.code+'</span><h3>'+t[0]+'</h3>'+t[1]+'<p class="cite">FAI F9A 2026 · '+(cls==='A'?'F9A-A 40 cm':'F9A-B 20 cm')+'</p>';
+  }
+
+  function render(){
+    document.getElementById('info').innerHTML = info(current);
+    document.querySelectorAll('.hot').forEach(function(g){ g.classList.toggle('on', g.dataset.key===current); });
+    document.getElementById('dimL').textContent = SPEC[cls].L;
+    document.getElementById('dimW').textContent = SPEC[cls].W;
+  }
+
+  function setLang(l){
+    lang = l;
+    root.setAttribute('data-lang', l);
+    root.setAttribute('lang', l==='zh' ? 'zh-Hant' : 'en');
+    document.title = l==='zh' ? '無人機足球資訊站 · Drone Soccer Hub' : 'Drone Soccer Hub · 無人機足球資訊站';
+    document.querySelectorAll('[data-set-lang]').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.setLang===l); });
+    try{ localStorage.setItem('ds-lang', l); }catch(e){}
+    render();
+  }
+
+  document.querySelectorAll('[data-set-lang]').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.dataset.setLang); });
+  });
+  document.querySelectorAll('[data-class]').forEach(function(b){
+    b.addEventListener('click', function(){
+      cls = b.dataset.class;
+      document.querySelectorAll('[data-class]').forEach(function(x){ x.setAttribute('aria-pressed', x===b); });
+      render();
+    });
+  });
+  document.querySelectorAll('.hot').forEach(function(g){
+    function pick(){ current = g.dataset.key; render(); }
+    g.addEventListener('click', pick);
+    g.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); pick(); } });
+  });
+
+  var initial = 'zh';
+  var q = new URLSearchParams(location.search).get('lang');
+  if (q==='en' || q==='zh') initial = q;
+  else { try{ var s = localStorage.getItem('ds-lang'); if (s==='en'||s==='zh') initial = s; }catch(e){} }
+  setLang(initial);
+})();
+</script>
+</body>
+</html>
